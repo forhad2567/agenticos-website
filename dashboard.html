@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AgenticOS analytics dashboard for multi-agent system insights">
+    <title>Dashboard - AgenticOS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="taxtstyle.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body class="dashboard-page">
+    <header>
+        <nav class="navbar">
+            <div class="nav-logo">
+                <h2>AgenticOS</h2>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="technology.html">Technology</a></li>
+                <li><a href="applications.html">Applications</a></li>
+                <li><a href="research.html">Research</a></li>
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="nav-cta">
+                <a href="#" onclick="openLoginModal(); return false;" class="btn btn-primary">Get Started</a>
+            </div>
+        </nav>
+    </header>
+
+    <section class="dashboard">
+
+        <!-- HEADER -->
+        <div class="dashboard-header">
+            <h1>AgenticOS Analytics Dashboard</h1>
+            <p>Real-time insights into multi-agent system adoption and performance</p>
+
+            <div class="actions">
+                <button class="btn-green" type="button" onclick="openChat(); return false;">Export</button>
+                <button class="btn-dark" type="button" onclick="openChat(); return false;">Share</button>
+            </div>
+        </div>
+
+        <!-- STATS -->
+        <div class="stats">
+
+            <div class="stat-card">
+                <h4>Global Adoption Rate</h4>
+                <h2>95%</h2>
+            </div>
+
+            <div class="stat-card">
+                <h4>Active Developers</h4>
+                <h2>10,000+</h2>
+            </div>
+
+            <div class="stat-card">
+                <h4>Avg ROI Increase</h4>
+                <h2>+45%</h2>
+            </div>
+
+        </div>
+
+        <!-- FILTER BUTTONS -->
+        <div class="filters">
+            <button type="button" onclick="setDashboardPeriod('Last Month'); return false;">Last Month</button>
+            <button type="button" onclick="setDashboardPeriod('Last Quarter'); return false;">Last Quarter</button>
+            <button class="active" type="button" onclick="setDashboardPeriod('Last Year'); return false;">Last Year</button>
+        </div>
+
+        <!-- CHART -->
+        <div class="chart-box">
+            <h3>AI Adoption Growth & Enterprise Spend</h3>
+            <canvas id="myChart"></canvas>
+        </div>
+
+    </section>
+
+    <footer>
+        <p>&copy; 2026 MD Forhad Hossain. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const ctx = document.getElementById('myChart');
+
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025', '2026'],
+                datasets: [
+                    {
+                        label: 'Adoption Rate (%)',
+                        data: [5, 10, 25, 40, 60, 70, 75, 78, 80],
+                        borderWidth: 3,
+                        borderColor: '#22c55e',
+                        backgroundColor: 'rgba(34, 197, 94, 0.15)',
+                        tension: 0.4,
+                        fill: true
+                    },
+                    {
+                        label: 'Enterprise Spend ($B)',
+                        data: [2, 5, 10, 20, 35, 50, 65, 80, 95],
+                        borderWidth: 3,
+                        borderColor: '#60a5fa',
+                        backgroundColor: 'rgba(96, 165, 250, 0.15)',
+                        tension: 0.4,
+                        fill: true
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        labels: {
+                            color: '#ffffff'
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        ticks: { color: '#cbd5f5' },
+                        grid: { color: 'rgba(203, 213, 245, 0.2)' }
+                    },
+                    y: {
+                        ticks: { color: '#cbd5f5' },
+                        grid: { color: 'rgba(203, 213, 245, 0.2)' }
+                    }
+                }
+            }
+        });
+
+        function setDashboardPeriod(period) {
+            const buttons = document.querySelectorAll('.filters button');
+            buttons.forEach(btn => {
+                btn.classList.toggle('active', btn.textContent.trim() === period);
+            });
+            const statusText = document.createElement('div');
+            statusText.className = 'dashboard-status';
+            statusText.textContent = `Showing analytics for ${period}. Chat with AgenticOS for details.`;
+            const chartBox = document.querySelector('.chart-box');
+            const existing = document.querySelector('.dashboard-status');
+            if (existing) existing.remove();
+            chartBox.insertBefore(statusText, chartBox.firstChild);
+        }
+    </script>
+    <script src="chatbot.js"></script>
+
+    <div id="loginModal" class="modal-overlay">
+        <div class="modal-card">
+            <button class="close-modal" onclick="closeLoginModal()">✖</button>
+            <h2 id="authModalTitle">Access AgenticOS</h2>
+            <p id="authModalDescription">Login to launch the platform assistant and get instant website guidance.</p>
+            <div class="auth-mode-switch">
+                <button type="button" id="loginModeBtn" class="btn-secondary active" onclick="setAuthMode('login')">Login</button>
+                <button type="button" id="signupModeBtn" class="btn-secondary" onclick="setAuthMode('signup')">Sign Up</button>
+            </div>
+            <form id="loginForm">
+                <div id="signupNameField" class="hidden">
+                    <label for="signupName">Your Name</label>
+                    <input id="signupName" type="text" placeholder="Jane Doe" />
+                </div>
+                <label for="loginEmail">Email</label>
+                <input id="loginEmail" type="email" placeholder="admin@agenticos.com" required>
+                <label for="loginPassword">Password</label>
+                <input id="loginPassword" type="password" placeholder="Password" required>
+                <div id="signupConfirmField" class="hidden">
+                    <label for="signupPasswordConfirm">Confirm Password</label>
+                    <input id="signupPasswordConfirm" type="password" placeholder="Confirm password" />
+                </div>
+                <div id="loginError" class="form-error"></div>
+                <button id="authSubmitBtn" type="submit" class="btn btn-primary">Login</button>
+            </form>
+            <p class="modal-note">Demo access: <strong>admin@agenticos.com</strong> / <strong>AgenticOS123</strong>.</p>
+        </div>
+    </div>
+
+    <button class="chat-toggle" onclick="openChat()" aria-label="Open chat">Chat</button>
+
+    <div id="chatWidget" class="chat-widget">
+        <div class="chat-header">
+            <span>AgenticOS Chat</span>
+            <button onclick="closeChat()">✖</button>
+        </div>
+        <div id="chatBox" class="chat-box"></div>
+        <div class="chat-input-area">
+            <input id="chatInput" type="text" placeholder="Type a message..." />
+            <button onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+</body>
+
+</html>
