@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - AgenticOS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="taxtstyle.css">
+</head>
+
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="nav-logo">
+                <h2>AgenticOS</h2>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="technology.html">Technology</a></li>
+                <li><a href="applications.html">Applications</a></li>
+                <li><a href="research.html">Research</a></li>
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="nav-cta">
+                <a href="#" onclick="openLoginModal(); return false;" class="btn btn-primary">Get Started</a>
+            </div>
+        </nav>
+    </header>
+
+    <section class="about-hero">
+        <div class="container">
+            <h1>About AgenticOS</h1>
+            <p>
+                We're pioneering the future of autonomous intelligence through multi-agent
+                systems that empower organizations to solve complex challenges at scale.
+            </p>
+        </div>
+    </section>
+
+    <section class="about-content container">
+        <div class="mission">
+            <h2>Our Mission</h2>
+            <p>
+                To democratize autonomous intelligence by providing accessible, transparent,
+                and ethical multi-agent systems that enable organizations of all sizes to
+                harness the power of collaborative AI.
+            </p>
+
+            <p>
+                We believe that the future of work isn't about replacing humans—it's about
+                augmenting human capabilities with intelligent agents that handle routine
+                tasks, freeing teams to focus on strategic innovation.
+            </p>
+        </div>
+
+        <div class="vision">
+            <h2>Our Vision</h2>
+
+            <div class="vision-item">
+                <h3>Industry Leadership</h3>
+                <p>Become the trusted platform for enterprise multi-agent deployments globally.</p>
+            </div>
+
+            <div class="vision-item">
+                <h3>Community Empowerment</h3>
+                <p>Foster a vibrant ecosystem of researchers, developers, and innovators.</p>
+            </div>
+
+            <div class="vision-item">
+                <h3>Ethical Innovation</h3>
+                <p>Lead the charge in transparent, fair, and responsible AI governance.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 MD Forhad Hossain. All rights reserved.</p>
+    </footer>
+    <script src="chatbot.js"></script>
+
+    <div id="loginModal" class="modal-overlay">
+        <div class="modal-card">
+            <button class="close-modal" onclick="closeLoginModal()">✖</button>
+            <h2 id="authModalTitle">Access AgenticOS</h2>
+            <p id="authModalDescription">Login to launch the platform assistant and get instant website guidance.</p>
+            <div class="auth-mode-switch">
+                <button type="button" id="loginModeBtn" class="btn-secondary active" onclick="setAuthMode('login')">Login</button>
+                <button type="button" id="signupModeBtn" class="btn-secondary" onclick="setAuthMode('signup')">Sign Up</button>
+            </div>
+            <form id="loginForm">
+                <div id="signupNameField" class="hidden">
+                    <label for="signupName">Your Name</label>
+                    <input id="signupName" type="text" placeholder="Jane Doe" />
+                </div>
+                <label for="loginEmail">Email</label>
+                <input id="loginEmail" type="email" placeholder="admin@agenticos.com" required>
+                <label for="loginPassword">Password</label>
+                <input id="loginPassword" type="password" placeholder="Password" required>
+                <div id="signupConfirmField" class="hidden">
+                    <label for="signupPasswordConfirm">Confirm Password</label>
+                    <input id="signupPasswordConfirm" type="password" placeholder="Confirm password" />
+                </div>
+                <div id="loginError" class="form-error"></div>
+                <button id="authSubmitBtn" type="submit" class="btn btn-primary">Login</button>
+            </form>
+            <p class="modal-note">Demo access: <strong>admin@agenticos.com</strong> / <strong>AgenticOS123</strong>.</p>
+        </div>
+    </div>
+
+    <button class="chat-toggle" onclick="openChat()" aria-label="Open chat">Chat</button>
+
+    <div id="chatWidget" class="chat-widget">
+        <div class="chat-header">
+            <span>AgenticOS Chat</span>
+            <button onclick="closeChat()">✖</button>
+        </div>
+        <div id="chatBox" class="chat-box"></div>
+        <div class="chat-input-area">
+            <input id="chatInput" type="text" placeholder="Type a message..." />
+            <button onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+</body>
+
+</html>
